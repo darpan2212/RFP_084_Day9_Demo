@@ -1,5 +1,6 @@
 package com.emp;
 
+
 public class EmployeeWageCalculation {
 
 	public static void main(String[] args) {
