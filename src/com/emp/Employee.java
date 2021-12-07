@@ -57,4 +57,11 @@ public class Employee {
 //		System.out.println(emp.empName + "'s total working hour : " + totalWorkingHour);
 		return totalSalary;
 	}
+
+	@Override
+	public String toString() {
+		return "Company name : " + companyName + "\nEmployee name : " + empName + "" + "\nMonthly Wage : "
+				+ calculateEmpWage() + " $";
+	}
+
 }

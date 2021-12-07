@@ -4,15 +4,12 @@ public class EmployeeWageCalculation {
 
 	public static void main(String[] args) {
 		Employee dmartEmp = new Employee("DMart", "John", 8, 20, 20, 60);
-		int dmartEmpWage = dmartEmp.calculateEmpWage();
-
-		System.out.println(dmartEmp.empName + " is working with " + dmartEmp.companyName + ", and he is earning "
-				+ dmartEmpWage + "$ monthly");
-
-		Employee rILEmp = new Employee("Reliance", "Tony", 9, 15, 25, 80);
-		int rILEmpWage = rILEmp.calculateEmpWage();
-		System.out.println(rILEmp.empName + " is working with " + rILEmp.companyName + ", and he is earning "
-				+ rILEmpWage + "$ monthly");
+		System.out.println(dmartEmp);
+		
+		System.out.println("--------------------------------------");
+		
+		Employee rilEmp = new Employee("RIL", "Tony", 9, 25, 25, 80);
+		System.out.println(rilEmp);
 	}
 
 }
