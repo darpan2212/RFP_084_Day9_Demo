@@ -3,31 +3,38 @@ package com.emp;
 public class Employee {
 
 	String empName;
-	
-	public Employee(String empName) {
+	String companyName;
+	int workingHour;
+	int wagePerHour;
+	int maxWorkingDay;
+	int maxWorkingHour;
+
+	public Employee(String companyName, String empName, int workingHour, int wagePerHour, int maxWorkingDay,
+			int maxWorkingHour) {
 		this.empName = empName;
+		this.companyName = companyName;
+		this.workingHour = workingHour;
+		this.wagePerHour = wagePerHour;
+		this.maxWorkingDay = maxWorkingDay;
+		this.maxWorkingHour = maxWorkingHour;
 	}
-	
+
 	static final int IS_PRESENT = 1;
 	static final int IS_PART_TIME = 2;
-	static final int FULL_DAY_WORKING_HOUR = 8;
-	static final int SALARY_PER_HOUR = 20;
-	static final int TOTAL_WORK_DAY = 20;
-	static final int MAX_WORKING_HOUR = 100;
-	
-	public int isEmpPresent() {
+
+	private int isEmpPresent() {
 		return (int) (Math.floor(Math.random() * 10) % 3);
 	}
 
-	public int getWorkignHour(int attendanceCheck) {
+	private int getWorkignHour(int attendanceCheck) {
 		int empHr;
 		switch (attendanceCheck) {
 		case IS_PRESENT:
-			empHr = FULL_DAY_WORKING_HOUR;
+			empHr = workingHour;
 			break;
 
 		case IS_PART_TIME:
-			empHr = (FULL_DAY_WORKING_HOUR / 2);
+			empHr = (workingHour / 2);
 			break;
 
 		default:
@@ -37,4 +44,17 @@ public class Employee {
 		return empHr;
 	}
 
+	public int calculateEmpWage() {
+		int day = 0;
+		int totalWorkingHour = 0;
+		while (day < maxWorkingDay && (totalWorkingHour + workingHour) <= maxWorkingHour) {
+			day++;
+			int workingHour = getWorkignHour(isEmpPresent());
+			totalWorkingHour += workingHour;
+		}
+		int totalSalary = totalWorkingHour * wagePerHour;
+//		System.out.println(emp.empName + "'s monthly wage : " + totalSalary);
+//		System.out.println(emp.empName + "'s total working hour : " + totalWorkingHour);
+		return totalSalary;
+	}
 }
