@@ -1,26 +1,25 @@
 package com.emp;
 
-public class Employee {
+public class Company {
 
-	String empName;
+	static final int IS_PRESENT = 1;
+	static final int IS_PART_TIME = 2;
+
 	String companyName;
 	int workingHour;
 	int wagePerHour;
 	int maxWorkingDay;
 	int maxWorkingHour;
 
-	public Employee(String companyName, String empName, int workingHour, int wagePerHour, int maxWorkingDay,
-			int maxWorkingHour) {
-		this.empName = empName;
+	int totalEmpWage;
+
+	public Company(String companyName, int workingHour, int wagePerHour, int maxWorkingDay, int maxWorkingHour) {
 		this.companyName = companyName;
 		this.workingHour = workingHour;
 		this.wagePerHour = wagePerHour;
 		this.maxWorkingDay = maxWorkingDay;
 		this.maxWorkingHour = maxWorkingHour;
 	}
-
-	static final int IS_PRESENT = 1;
-	static final int IS_PART_TIME = 2;
 
 	private int isEmpPresent() {
 		return (int) (Math.floor(Math.random() * 10) % 3);
@@ -44,7 +43,7 @@ public class Employee {
 		return empHr;
 	}
 
-	public int calculateEmpWage() {
+	public void calculateEmpWage() {
 		int day = 0;
 		int totalWorkingHour = 0;
 		while (day < maxWorkingDay && (totalWorkingHour + workingHour) <= maxWorkingHour) {
@@ -52,16 +51,11 @@ public class Employee {
 			int workingHour = getWorkignHour(isEmpPresent());
 			totalWorkingHour += workingHour;
 		}
-		int totalSalary = totalWorkingHour * wagePerHour;
-//		System.out.println(emp.empName + "'s monthly wage : " + totalSalary);
-//		System.out.println(emp.empName + "'s total working hour : " + totalWorkingHour);
-		return totalSalary;
+		totalEmpWage = totalWorkingHour * wagePerHour; //
 	}
 
 	@Override
 	public String toString() {
-		return "Company name : " + companyName + "\nEmployee name : " + empName + "" + "\nMonthly Wage : "
-				+ calculateEmpWage() + " $";
+		return "Company name : " + companyName + "\nEmployee Wage : " + totalEmpWage;
 	}
-
 }
