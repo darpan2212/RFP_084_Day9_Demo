@@ -1,32 +1,35 @@
 package com.emp;
 
-public class EmployeeWageBuilder {
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
+public class EmployeeWageBuilder implements IEmployeeWage {
 
 	String empName;
-	Company[] companies;
-	private int numOfCompany;
-
+	List<Company> companies;
+	Map<String, Company> companiesMap;
+	
 	public EmployeeWageBuilder(String empName) {
 		this.empName = empName;
-		companies = new Company[100];
+		companies = new LinkedList<Company>();
+		companiesMap = new HashMap<String, Company>();
 	}
 
+	@Override
 	public void addCompany(Company company) {
-		companies[numOfCompany++] = company;
-		/*
-		 * for (int i = 0; i < companies.length; i++) { if (companies[i] == null) {
-		 * companies[i] = company; break; } }
-		 */
+		companies.add(company);
+		calculateAllCompaniesEmpWage();
 	}
 
 	public void calculateAllCompaniesEmpWage() {
 		for (Company company : companies) {
-			if (company == null) {
-				break;
+			if(!companiesMap.containsKey(company.companyName)) {
+				company.calculateEmpWage();
+				companiesMap.put(company.companyName, company);	
 			}
-			company.calculateEmpWage();
 		}
-		System.out.println(this);
 	}
 
 	@Override
@@ -40,5 +43,22 @@ public class EmployeeWageBuilder {
 		}
 		return str;
 	}
+	
+	
 
+	@Override
+	public int getTotalWage(String companyName) {
+		return companiesMap.get(companyName).totalEmpWage;
+	}
+
+	@Override
+	public Company getCompany(int index) {
+		return companies.get(index);
+	}
+
+	@Override
+	public Company getCompany(String companyName) {
+		return companiesMap.get(companyName);
+	}
+	
 }
